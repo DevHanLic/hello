@@ -5,7 +5,7 @@
     </el-row>
     <el-table
       :data="tableData"
-      style="width: 100%" >
+      style="width: 100%">
       <el-table-column
         prop="id"
         label="日期"
@@ -28,15 +28,16 @@
 <script>
   export default {
     name: 'test',
-    data() {
+    data () {
       return {
         tableData: [{
           id: '',
           username: '',
           password: ''
         }]
-      }},
-    created() {
+      }
+    },
+    created () {
       // this.$axios({
       //   method: 'post',
       //   url: 'http://localhost:8086/test/selectById',
@@ -46,20 +47,20 @@
       // }).then(function (response) {
       //   // _this.tableData=response.data;
       // })
-      },
-    methods:{
-      searchList(){
-        let _this=this;
-        this.$axios.get("http://localhost:8086/test/hello")
+    },
+    methods: {
+      searchList () {
+        let _this = this
+        this.$axios.get('http://localhost:8086/test/hello')
           .then(function (response) {
-            _this.tableData=response.data;
+            _this.tableData = response.data
             console.log(response.data)
           }).catch(function (err) {
           console.log(err)
         })
       }
     }
-      }
+  }
 </script>
 
 <style scoped>
