@@ -22,6 +22,16 @@
         width="360">
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      @size-change="handleSizeChange"
+      @current-change="headleCurrentChange"
+      :current-page="currPage"
+      :page-sizes = "[3,5]"
+      :page-size = "pageSize"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
@@ -33,8 +43,11 @@
         tableData: [{
           id: '',
           username: '',
-          password: ''
-        }]
+          password: '',
+        }],
+        currPage: 0,
+        pageSize: 5,
+        total: 0
       }
     },
     created () {
@@ -51,13 +64,28 @@
     methods: {
       searchList () {
         let _this = this
-        this.$axios.get('http://localhost:8086/test/hello')
+        this.$axios.get('http://localhost:8086/test/hello',{ params:{
+            'currPage': _this.currPage,
+            'pageSize': _this.pageSize
+          }
+        })
           .then(function (response) {
-            _this.tableData = response.data
-            console.log(response.data)
+            _this.tableData = response.data.list
+            _this.total = response.data.total;
+            // console.log(response.data.total)
           }).catch(function (err) {
           console.log(err)
         })
+      },
+      headleCurrentChange(val) {
+        let _this = this
+        _this.currPage = val;
+        _this.searchList();
+      },
+      handleSizeChange(val){
+        let _this = this
+        _this.pageSize = val;
+        _this.searchList();
       }
     }
   }
