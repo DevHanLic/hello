@@ -1,11 +1,11 @@
 <template>
   <div>
-    <el-form ref="form" :model="login" label-width="80px" style="width: 20%">
+    <el-form ref="form" :model="tableData" label-width="80px" style="width: 20%">
       <el-form-item label="姓名">
-        <el-input v-model="login.username"></el-input>
+        <el-input v-model="tableData.username"></el-input>
       </el-form-item>
       <el-form-item label="地址">
-        <el-input v-model="login.password"></el-input>
+        <el-input v-model="tableData.password"></el-input>
       </el-form-item>
 
       <el-form-item>
@@ -18,19 +18,14 @@
 
 <script>
   export default {
-    name: 'Useradd',
+    name: 'update',
     data () {
       return {
-        login: {
+        tableData: [{
+          id: '',
           username: '',
           password: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        }
+        }]
       }
     },
     methods: {

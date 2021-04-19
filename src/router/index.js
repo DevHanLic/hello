@@ -5,6 +5,7 @@ import user from '../components/user'
 import home from '../components/home'
 import add from '../components/Useradd'
 import test from '../components/test'
+import update from '../components/update'
 Vue.use(Router)
 
 export default new Router({
@@ -17,8 +18,11 @@ export default new Router({
     // {path: '/',redirect:'/home'},
     {path: '/',redirect:'/test'},
     {path: '/test',component:test},
+    {path: '/update',component:update},
     {path: '/home',component:home},
     {path: '/user',component:user,
-    children:[{path:'add',component:add}]}
+    children:[{path:'add',component:add}]
+    },
+    {path: '/add',component:add},
   ]
 })
