@@ -11,7 +11,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button  type="primary" @click="onSubmit">更新</el-button>
+        <el-button type="primary" @click="onSubmit">更新</el-button>
         <el-button @click="goToHome">取消</el-button>
       </el-form-item>
     </el-form>
@@ -29,14 +29,14 @@
           username: '',
           password: '',
         },
-        info:{
-          message:'',
-          type:'',
+        info: {
+          message: '',
+          type: '',
         }
       }
     },
     mounted () {
-      this.tableData = this.$route.params.row;
+      this.tableData = this.$route.params.row
     },
     methods: {
       onSubmit () {
@@ -44,20 +44,20 @@
         this.$axios.post('http://localhost:8086/test/update', _this.tableData
         ).then(function (response) {
           if (response.status === 200) {
-            _this.messageInfo('更新成功','success');
+            _this.messageInfo('更新成功', 'success')
           } else {
-            _this.messageInfo('更新失败','error');
+            _this.messageInfo('更新失败', 'error')
           }
           _this.goToHome()
         }).catch(function (err) {
           console.log(err)
         })
       },
-      messageInfo(message,type){
+      messageInfo (message, type) {
         this.$message({
           message: message,
           type: type
-        });
+        })
       },
       goToHome () {
         //直接跳转

@@ -32,8 +32,8 @@
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="danger"  @click='deleteById(scope.row.id)'>删除</el-button>
-          <el-button type="primary"  @click='updateById(scope.row)'>编辑</el-button>
+          <el-button type="danger" @click='deleteById(scope.row.id)'>删除</el-button>
+          <el-button type="primary" @click='updateById(scope.row)'>编辑</el-button>
         </template>
       </el-table-column>
 
@@ -101,11 +101,11 @@
             'input': _this.input
           }
         }).then(function (response) {
-              _this.tableData = response.data.list
-              _this.total = response.data.total
-          }).catch(function (err) {
-            console.log(err)
-          },)
+          _this.tableData = response.data.list
+          _this.total = response.data.total
+        }).catch(function (err) {
+          console.log(err)
+        },)
       },
       headleCurrentChange (val) {
         let _this = this
@@ -126,13 +126,13 @@
         this.$axios.post('http://localhost:8086/test/selectById', {
           id: val
         }).then(function (response) {
-            if (response.status === 200) {
-              alert('删除成功')
-            } else {
-              alert('删除失败')
-            }
-            _this.searchList()
-          }).catch(function (err) {
+          if (response.status === 200) {
+            alert('删除成功')
+          } else {
+            alert('删除失败')
+          }
+          _this.searchList()
+        }).catch(function (err) {
             console.log(err)
           }
         )

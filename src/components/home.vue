@@ -11,18 +11,17 @@
 
 <script>
   import Footer from './Footer'
-export default {
-  name: 'home',
-  data(){
-    return{}
-  },
-  methods:{
 
-  },
-  components:{
-    Footer
+  export default {
+    name: 'home',
+    data () {
+      return {}
+    },
+    methods: {},
+    components: {
+      Footer
+    }
   }
-}
 
 </script>
 

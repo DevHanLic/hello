@@ -1,8 +1,8 @@
 <template>
-    <div>
-      <a href="#/user/add">增加</a>
-      <router-view></router-view>
-    </div>
+  <div>
+    <a href="#/user/add">增加</a>
+    <router-view></router-view>
+  </div>
 
 </template>
 
