@@ -31,16 +31,15 @@
       </el-table-column>
 
       <el-table-column label="操作">
-        <template slot-scope = "scope">
-          <el-button type="danger" v-if="play"  @click='deleteById(scope.row.id)'>删除</el-button>
-          <el-button type="primary" v-if="play" @click='updateById(scope.row)'>编辑</el-button>
+        <template slot-scope="scope">
+          <el-button type="danger"  @click='deleteById(scope.row.id)'>删除</el-button>
+          <el-button type="primary"  @click='updateById(scope.row)'>编辑</el-button>
         </template>
       </el-table-column>
 
     </el-table>
 
     <el-pagination
-      v-if="play"
       background
       layout="total, sizes, prev, pager, next, jumper"
       @size-change="handleSizeChange"
@@ -59,16 +58,11 @@
     name: 'test',
     data () {
       return {
-        tableData: [{
-          id: '',
-          username: '',
-          password: '',
-        }],
+        tableData: [],
         currPage: 0,
         pageSize: 5,
         total: 0,
-        input: '',
-        play: false
+        input: ''
       }
     },
     created () {
@@ -81,6 +75,20 @@
       // }).then(function (response) {
       //   // _this.tableData=response.data;
       // })
+
+      /*this.$axios.post('http://localhost:8086/test/selectById',
+        {
+          id:8
+        })
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      .finally(_ => {
+        // do something
+      })*/
     },
 
     methods: {
@@ -92,15 +100,12 @@
             'pageSize': _this.pageSize,
             'input': _this.input
           }
-        })
-          .then(function (response) {
-            _this.tableData = response.data.list
-            _this.total = response.data.total
+        }).then(function (response) {
+              _this.tableData = response.data.list
+              _this.total = response.data.total
           }).catch(function (err) {
             console.log(err)
-          },
-          _this.play = true
-        )
+          },)
       },
       headleCurrentChange (val) {
         let _this = this
@@ -118,10 +123,9 @@
       },
       deleteById (val) {
         let _this = this
-        this.$axios.post('http://localhost:8086/test/selectById',{
-          id : val
-        })
-          .then(function (response) {
+        this.$axios.post('http://localhost:8086/test/selectById', {
+          id: val
+        }).then(function (response) {
             if (response.status === 200) {
               alert('删除成功')
             } else {
@@ -133,14 +137,20 @@
           }
         )
       },
-      updateById(row){
-        console.log(row)
+      updateById (row) {
         //直接跳转
-        this.$router.push('/update')
+        this.$router.push({
+          name: 'update',
+          params: {
+            row: row
+          }
+        })
       },
-      dateFormat(row,column,cellValue){
-        let date = row[column.property];
-        if(date === undefined || date === ''){return ''};
+      dateFormat (row, column, cellValue) {
+        let date = row[column.property]
+        if (date === undefined || date === '') {
+          return ''
+        }
         return cellValue.replace(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1-$2-$3 $4:$5:$6')
       }
     }

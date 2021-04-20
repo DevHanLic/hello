@@ -18,7 +18,7 @@ export default new Router({
     // {path: '/',redirect:'/home'},
     {path: '/',redirect:'/test'},
     {path: '/test',component:test},
-    {path: '/update',component:update},
+    {path: '/update',component:update,name: 'update'},
     {path: '/home',component:home},
     {path: '/user',component:user,
     children:[{path:'add',component:add}]
